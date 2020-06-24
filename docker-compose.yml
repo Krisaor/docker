@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+        erik_db:
+                image: krisaor/linux-academy:mysql1.0.0.RELEASE
+                ports:
+                        - "3306:3306"
+                restart: always
+                environment:
+                        MYSQL_ROOT_PASSWORD: mysql7752
+                        MYSQL_PASSWORD: mysql7752
+                        MYSQL_DATABASE: ingerencia
+                networks:
+                        - my_docker_network
+
+        ms-ingerencia-ng:
+                image: krisaor/linux-academy:java1.0.0.RELEASE
+                ports:
+                        - "8080:8080"
+                restart: always
+                networks:
+                        - my_docker_network
+
+#Network to be created
+networks:
+        my_docker_network:
