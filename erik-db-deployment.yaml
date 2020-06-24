@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: erik-db
+  name: erik-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: erik-db
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/my_docker_network: "true"
+        io.kompose.service: erik-db
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_DATABASE
+          value: ingerencia
+        - name: MYSQL_PASSWORD
+          value: mysql7752
+        - name: MYSQL_ROOT_PASSWORD
+          value: mysql7752
+        image: krisaor/linux-academy:mysql1.0.0.RELEASE
+        imagePullPolicy: ""
+        name: erik-db
+        ports:
+        - containerPort: 3306
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
